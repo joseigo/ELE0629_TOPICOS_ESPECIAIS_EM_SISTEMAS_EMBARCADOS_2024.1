@@ -73,9 +73,10 @@ void app_main(void)
     gpio_init();
     while (1)
     {
-        ESP_LOGI(TAG, "LED1 %s!", LED1State == true ? "ON" : "OFF");
-        ESP_LOGI(TAG, "LED2 %s!", LED2State == true ? "ON" : "OFF");
-        ESP_LOGI(TAG, "LED3 %s!", LED3State == true ? "ON" : "OFF");
+        ESP_LOGI(TAG, "\nLED1 %s"
+                      "\nLED2 %s!"
+                      "\nLED3 %s!",
+                 LED1State == true ? "ON" : "OFF", LED2State == true ? "ON" : "OFF", LED3State == true ? "ON" : "OFF");
         gpio_set_level(LED1_PIN, LED1State);
         LED1State = !LED1State;
         vTaskDelay(500 / portTICK_PERIOD_MS);
