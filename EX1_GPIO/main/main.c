@@ -1,3 +1,4 @@
+
 ///////////////////////////////////////////////////////////////////////
 ////// ELE0629 - TÓPICOS ESPECIAIS EM SISTEMAS EMBARCADOS 2024.1 //////
 ///////////////////////////////////////////////////////////////////////
@@ -30,14 +31,8 @@ bool LED1State = false;
 bool LED2State = false;
 bool LED3State = false;
 
-void IRAM_ATTR button1_isr(void *args)
-{
-    gpio_set_level(LED2_PIN, !gpio_get_level(LED2_PIN));
-}
-void IRAM_ATTR button2_isr(void *args)
-{
-    gpio_set_level(LED3_PIN, !gpio_get_level(LED3_PIN));
-}
+bool lastButton1State = true;
+bool lastButton2State = true;
 
 void gpio_init()
 {
@@ -59,26 +54,49 @@ void gpio_init()
     gpio_reset_pin(BUTTON2_PIN);
     gpio_set_direction(BUTTON2_PIN, GPIO_MODE_INPUT);
     gpio_set_pull_mode(BUTTON2_PIN, GPIO_PULLUP_ONLY);
-
-    // Habilitando as interrupções dos botões;
-    gpio_set_intr_type(BUTTON1_PIN, GPIO_INTR_LOW_LEVEL);
-    gpio_set_intr_type(BUTTON2_PIN, GPIO_INTR_LOW_LEVEL);
-    gpio_install_isr_service(0);
-    gpio_isr_handler_add(BUTTON1_PIN, button1_isr, NULL);
-    gpio_isr_handler_add(BUTTON2_PIN, button2_isr, NULL);
 }
 
 void app_main(void)
 {
     gpio_init();
+    int cont = 0;
     while (1)
     {
-        ESP_LOGI(TAG, "\nLED1 %s"
+
+        bool button1State = gpio_get_level(BUTTON1_PIN);
+        if (button1State != lastButton1State)
+        {
+            lastButton1State = button1State;
+            if (!button1State)
+            {
+                LED2State = !LED2State;
+            }
+        }
+
+        bool button2State = gpio_get_level(BUTTON2_PIN);
+        if (button2State != lastButton2State)
+        {
+            lastButton2State = button2State;
+            if (!button2State)
+            {
+                LED3State = !LED3State;
+            }
+        }
+
+        gpio_set_level(LED1_PIN, LED1State);
+        gpio_set_level(LED2_PIN, LED2State);
+        gpio_set_level(LED3_PIN, LED3State);
+
+        ESP_LOGI(TAG, "\nLED1 %s!"
                       "\nLED2 %s!"
                       "\nLED3 %s!",
                  LED1State == true ? "ON" : "OFF", LED2State == true ? "ON" : "OFF", LED3State == true ? "ON" : "OFF");
-        gpio_set_level(LED1_PIN, LED1State);
-        LED1State = !LED1State;
-        vTaskDelay(500 / portTICK_PERIOD_MS);
+
+        vTaskDelay(50 / portTICK_PERIOD_MS);
+        if ((cont++) > 10)
+        {
+            LED1State = !LED1State;
+            cont = 0;
+        }
     }
 }

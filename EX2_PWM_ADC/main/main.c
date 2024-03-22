@@ -31,7 +31,7 @@ void PWM_init()
     ledc_timer_config_t timer_conf = {
         .speed_mode = LEDC_LOW_SPEED_MODE,
         .timer_num = LEDC_TIMER_0,
-        .freq_hz = 5000,
+        .freq_hz = 50000,
         .duty_resolution = LEDC_TIMER_10_BIT,
         .clk_cfg = LEDC_APB_CLK};
     ledc_timer_config(&timer_conf); // Aplica a conf ao Timer
@@ -42,7 +42,7 @@ void PWM_init()
         .speed_mode = LEDC_LOW_SPEED_MODE,
         .timer_sel = LEDC_TIMER_0,
         .intr_type = LEDC_INTR_DISABLE,
-        .gpio_num = GPIO_NUM_2, // LED do ESP
+        .gpio_num = GPIO_NUM_27, // LED do ESP
         .duty = 0};
     ledc_channel_config(&channel_conf);
 }
@@ -51,7 +51,7 @@ void ADC_init()
 {
     // Inicializando o ADC. Define qual ADC será utilizado:
     adc_oneshot_unit_init_cfg_t init_config1 = {
-        .unit_id = ADC_UNIT_1,
+        .unit_id = ADC_UNIT_2,
     };
     ESP_ERROR_CHECK(adc_oneshot_new_unit(&init_config1, &adc1_handle));
 
@@ -59,13 +59,13 @@ void ADC_init()
     adc_oneshot_chan_cfg_t channel_conf = {
         .bitwidth = ADC_BITWIDTH_DEFAULT,
         .atten = ADC_ATTEN_DB_11};
-    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, ADC_CHANNEL_7, &channel_conf));
+    ESP_ERROR_CHECK(adc_oneshot_config_channel(adc1_handle, ADC_CHANNEL_6, &channel_conf));
 }
 
 int getADCraw()
 {
     int adc_raw = 0;
-    if (adc_oneshot_read(adc1_handle, ADC_CHANNEL_7, &adc_raw) == ESP_OK)
+    if (adc_oneshot_read(adc1_handle, ADC_CHANNEL_6, &adc_raw) == ESP_OK)
     {
         return ((adc_raw * 1024) / 4095);
     }
