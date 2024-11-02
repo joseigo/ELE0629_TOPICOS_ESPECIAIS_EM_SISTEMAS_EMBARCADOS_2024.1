@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/CMakeFiles/bootloader
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/CMakeFiles/bootloader.rule
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/CMakeFiles/bootloader-complete.rule
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+C:/Users/igojo/Documents/TESE/Projeto_1_TrueRMS/build/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule

@@ -64,7 +64,7 @@ void vTaskGetData(void *pvParameter)
             {
                 ESP_LOGI(LOG_task, "Leitura finalizada!");
                 xSemaphoreGive(xMutexSemaphore);
-                vTaskDelete(NULL);
+                vTaskDelete(xTaskGetCurrentTaskHandle());
             }
 
             xSemaphoreGive(xMutexSemaphore);
@@ -76,9 +76,9 @@ void vTaskGetData(void *pvParameter)
 void vTaskSetData(void *pvParameter)
 {
     const char *LOG_task = (const char *)pvParameter;
-    int cont_white = 0;
+    int cont_write = 0;
 
-    while (cont_white < 5)
+    while (cont_write < 5)
     {
         if (xSemaphoreTake(xMutexSemaphore, portMAX_DELAY) == pdTRUE)
         {
@@ -98,13 +98,8 @@ void vTaskSetData(void *pvParameter)
                 // Escreve o nome da tarefa no buffer
                 sprintf(buffer[position], "%s", LOG_task);
                 // ESP_LOGI(LOG_task, "Escreveu!");
-                cont_white++;
+                cont_write++;
             }
-            // else
-            // {
-            //     xSemaphoreGive(xMutexSemaphore);
-            //     xSemaphoreTake(xMutexSemaphore, pdMS_TO_TICKS(200));
-            // }
 
             xSemaphoreGive(xMutexSemaphore); // Libera o mutex após a escrita
         }

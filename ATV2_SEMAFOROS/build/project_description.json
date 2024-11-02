@@ -1,7 +1,7 @@
 {
     "version":            "1",
     "project_name":       "ATV2_SEMAFOROS",
-    "project_version":    "77328b7",
+    "project_version":    "9ca18ed-dirty",
     "project_path":       "C:/Users/igojo/Documents/TESE/ATV2_SEMAFOROS",
     "idf_path":           "C:/Espressif/frameworks/esp-idf-v5.1.2",
     "build_dir":          "C:/Users/igojo/Documents/TESE/ATV2_SEMAFOROS/build",
